@@ -2,7 +2,7 @@
 
 https://github.com/user-attachments/assets/049fa023-5bd7-49ff-a9b4-0566fa53584c
 
-# Unity Modular Systems Demo (Zenject)
+# Unity Modular Inventory & Input System Demo (Zenject)
 This project is a demonstration of modular Unity components built using Zenject for dependency injection and a signal-driven architecture. It features a flexible joystick system, a scriptable item database, and a decoupled inventory (backpack) system.
 
 ## Key Systems
