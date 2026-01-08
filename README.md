@@ -6,7 +6,7 @@ https://github.com/user-attachments/assets/049fa023-5bd7-49ff-a9b4-0566fa53584c
 
 **A high-performance, signal-driven Unity framework for mobile and top-down games.**
 
-![Unity](https://img.shields.io/badge/Unity-6.3+-black?style=flat&logo=unity)
+![Unity](https://img.shields.io/badge/Unity-2021.3.26f1-black?style=flat&logo=unity)
 ![Zenject](https://img.shields.io/badge/DI-Zenject-blue)
 ![Architecture](https://img.shields.io/badge/Pattern-SignalBus-orange)
 
@@ -59,7 +59,7 @@ Game balance is separated from logic using `ScriptableObject` configurations:
 ---
 
 ## 🛠 Tech Stack
-* **Engine:** Unity 6.3 (LTS).
+* **Engine:** Unity 2021.3.26f1 (LTS).
 * **DI Framework:** Zenject / Extenject.
 * **Patterns:** Signal Bus, Factory Pattern, Repository Pattern.
 * **UI:** Unity UI (uGUI) with custom EventSystem integration.
