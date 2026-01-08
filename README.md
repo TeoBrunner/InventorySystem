@@ -2,44 +2,73 @@
 
 https://github.com/user-attachments/assets/049fa023-5bd7-49ff-a9b4-0566fa53584c
 
-# Unity Modular Inventory & Input System Demo (Zenject)
-This project is a demonstration of modular Unity components built using Zenject for dependency injection and a signal-driven architecture. It features a flexible joystick system, a scriptable item database, and a decoupled inventory (backpack) system.
+# Modular Inventory & Input System 🎒🕹️
 
-## Key Systems
+**A high-performance, signal-driven Unity framework for mobile and top-down games.**
 
-### 1. Joystick Suite
-A collection of mobile-friendly input controllers with custom editor support:
-- Fixed Joystick: Stays in a static position.
-- Floating Joystick: Appears at the point of contact on the screen.
-- Variable/Dynamic Joystick: Can switch between modes and includes a "move threshold" to follow the user's touch.
-- Custom Editors: Each joystick type includes a specialized inspector for easier configuration in the Unity Editor.
+![Unity](https://img.shields.io/badge/Unity-6.3+-black?style=flat&logo=unity)
+![Zenject](https://img.shields.io/badge/DI-Zenject-blue)
+![Architecture](https://img.shields.io/badge/Pattern-SignalBus-orange)
 
-### 2. Inventory & Item System
-A data-driven approach to managing items and player storage:
-- Backpack Handler: Manages the logic for collecting items, filling slots, and syncing with the UI.
-- Item Database: A ScriptableObject that acts as a central registry for all game items.
-- Item Collector: Uses 2D triggers to detect CollectibleItem components and fires signals to the inventory.
+## 📖 Overview
 
-## Architecture & Communication
+This project is a technical demonstration of a **modular, decoupled architecture** for Unity. It focuses on two core pillars of game development: a robust **Mobile Input Suite** and a flexible **Data-Driven Inventory System**. 
+
+By leveraging **Zenject SignalBus**, the systems communicate without knowing about each other, making the codebase highly maintainable and easy to extend.
+
+---
+
+## 🎮 Key Features
+
+### 1. Advanced Joystick Suite
+A professional-grade mobile input solution with custom Editor tooling:
+* **Three Modes:** * *Fixed:* Static position for classic layouts.
+    * *Floating:* Appears at the touch point for ergonomic comfort.
+    * *Variable/Dynamic:* Follows the finger movement with a customizable "move threshold."
+* **Custom Inspectors:** Dedicated Unity Editor scripts for each joystick type to streamline configuration.
+
+### 2. Scalable Inventory System
+A slot-based "Backpack" system designed for performance and flexibility:
+* **Item Database:** A centralized `ScriptableObject` registry for easy balancing and item management.
+* **Collection Logic:** Uses 2D trigger detection with automated signal firing.
+* **UI Sync:** Real-time synchronization between the logical `BackpackHandler` and the uGUI representation.
+
+---
+
+## 🏗 Architecture & Patterns
+
+
+
+### Signal-Driven Communication
+Instead of using direct references or brittle C# events, this project utilizes the **Zenject SignalBus**. This creates a "Fire and Forget" workflow:
+* `CollectItemSignal`: Triggered by the world-space collector, picked up by the Inventory.
+* `BackpackToggleSignal`: Decouples the UI trigger from the inventory logic.
+* `BackpackSlotClickedSignal`: Handles UI interactions through a centralized command flow.
+
 ### Dependency Injection (Zenject)
-The project uses Zenject to keep components decoupled and easy to test:
-- Constructors: Dependencies like SignalBus and configuration data are injected into classes using the [Inject] attribute.
-- Installers: SceneInstaller and ConfigInstaller manage the binding of instances and global settings.
+The project adheres to the **Dependency Inversion Principle**:
+* **Constructors/Method Injection:** dependencies are provided by the DI Container, ensuring classes remain "Pure C#" where possible.
+* **Contextual Binding:** `SceneInstaller` and `ConfigInstaller` manage scope-specific instances.
 
-### Signal-Driven Events
-Communication between independent systems is handled via a SignalBus:
-- CollectItemSignal: Fired when a player picks up an item in the world.
-- BackpackToggleSignal: Controls the visibility of the inventory UI.
-- BackpackSlotClickedSignal: Handles interactions with specific inventory slots.
-- 
-### Configuration
-Most gameplay values are stored in ScriptableObject configs to allow for quick balancing without code changes:
-- PlayerConfig: Defines movement speed.
-- BackpackConfig: Sets the number of available inventory slots.
-- ItemData: Contains unique IDs, icons, and stack limits for items.
+### Data-Driven Design
+Game balance is separated from logic using `ScriptableObject` configurations:
+* `PlayerConfig`: Tune movement and agility in real-time.
+* `BackpackConfig`: Define slot counts and storage rules.
+* `ItemData`: Manage IDs, high-res icons, and stack properties in a single asset.
 
-### Tech Stack
-- Engine: Unity 2022.3.
-- DI Framework: Zenject.
-- UI: Unity UI (uGUI) with EventSystems.
-- Logic: C# using LINQ and SignalBus.
+---
+
+## 🛠 Tech Stack
+* **Engine:** Unity 6.3 (LTS).
+* **DI Framework:** Zenject / Extenject.
+* **Patterns:** Signal Bus, Factory Pattern, Repository Pattern.
+* **UI:** Unity UI (uGUI) with custom EventSystem integration.
+* **Tooling:** Custom Unity Editor scripting.
+
+---
+
+## 🚀 How to Use
+
+1.  **Configure Items:** Add new items to the `ItemDatabase` ScriptableObject.
+2.  **Adjust Input:** Select the Joystick prefab and choose the mode (Fixed/Floating/Variable) in the Inspector.
+3.  **Inject:** Use `[Inject] private SignalBus _signalBus;` in any new class to join the communication ecosystem.
